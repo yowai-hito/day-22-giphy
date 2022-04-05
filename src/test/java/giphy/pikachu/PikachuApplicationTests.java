@@ -13,7 +13,6 @@ class PikachuApplicationTests {
 	void contextLoads() {
 		QueryObject test = new QueryObject();
 		SearchService testService = new SearchService();
-		Assert
 
 	}
 
