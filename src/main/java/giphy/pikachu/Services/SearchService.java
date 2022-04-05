@@ -33,7 +33,7 @@ public class SearchService {
             prop.load(input);
         }
         catch(Exception e) {
-            prop.setProperty("GIPHY_API_KEY", ${GIPHY_KEY});
+            prop.setProperty("GIPHY_API_KEY", GIPHY_KEY);
         }
 
         final String GIPHY_API_KEY = prop.getProperty("GIPHY_API_KEY");
