@@ -1,6 +1,9 @@
 package giphy.pikachu.Services;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.io.StringReader;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,13 +27,22 @@ public class SearchService {
 
     public JsonArray giphyRequest(QueryObject params){
 
+        Properties prop = new Properties();
 
+        try(InputStream input = new FileInputStream("application.properties")){
+            prop.load(input);
+        }
+        catch(Exception e) {
+            prop.setProperty("GIPHY_API_KEY", "invalid");
+        }
+
+        final String GIPHY_API_KEY = prop.getProperty("GIPHY_API_KEY");
 
         RestTemplate template = new RestTemplate();
 
         String endpoint = UriComponentsBuilder
             .fromUriString("https://api.giphy.com/v1/gifs/search")
-            .queryParam("api_key",${{ secrets.GIPHY_API_KEY }})
+            .queryParam("api_key",GIPHY_API_KEY)
             .queryParam("q", params.getQ())
             .queryParam("limit",params.getLimit())
             .queryParam("rating",params.getRating())
