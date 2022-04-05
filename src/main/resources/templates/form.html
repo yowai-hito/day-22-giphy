@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form th:object="${params}"
+    th:action="@{/search}"
+    method="POST">
+        <label>Limit</label>
+        <input id="limit" type="number" th:field="*{limit}"/>
+        <label>Offset</label>
+        <input id="offset" type="number" th:field="*{offset}"/>
+        <label>Subject</label>
+        <input id="q" type="text" th:field="*{q}"/>
+        <label>Rating</label>
+        <input list = "rating">
+        <datalist id="rating" th:field="*{rating}">
+            <option value = "g">
+            <option value = "pg">
+            <option value = "pg-13">
+            <option value = "r">
+        </datalist><br>
+        <button type="submit">Search</button>
+    </form>
+</body>
+</html>
